@@ -1,0 +1,536 @@
+# Declare characters used by this game.
+define r = Character(_("Richard"), color="#c8ffc8")
+define m = Character(_("Me"), color="#c8c8ff")
+define vr = Character(_("Voice of Richard"), color="#c8ffc8")
+# This is a variable that is True if you've compared a VN to a book, and False
+# otherwise.
+default book = False
+
+default collected_items = 0
+default total_items = 5
+
+screen collectible_counter():
+    frame:
+        xalign 0.98
+        yalign 0.98
+        padding (10, 5)
+        background "#0008"
+        text "[collected_items] / [total_items] books collected" size 22 color "#FFFFFF"
+
+# The game starts here.
+label start:
+    show screen collectible_counter
+    # Start by playing some music.
+
+
+
+    scene imagedoor
+    with fade
+    play music "repenewmain.mp3" loop
+    m "Richard has built a Cathedral to a career in book publishing."
+    m "The first step is to be granted access."
+
+    menu:
+
+        m "What should I do?"
+
+        "Call Richard":
+
+            jump enter
+
+        "Leave":
+
+            jump later
+
+label enter:
+
+    scene black
+    with dissolve
+
+    m "He answered and had the handyman unlock the door for me."
+
+
+
+
+
+    scene secondentrance
+    with fade
+
+
+    m "A drawn curtain at the end of a hallway."
+    m "I am still not sure what I will ask him about when I find him. Maybe something about editing John Cage, or about his anthology of Gertude Stein writing?"
+
+    menu:
+
+        "Draw Curtain":
+
+            jump curtain
+
+        "Reflect on why I'm here":
+
+            jump reflect
+
+
+
+
+
+
+
+
+label reflect:
+    scene secondentrance
+
+    m "Richard Koestelaniz is an esteemed publisher of avantgarde literature fom the 1960s, first staring in Chelsea then moving to Ridgewood"
+    show dscf0787removebg
+    m "I brought two of my favorite books he edited, maybe he can sign one."
+
+
+    menu:
+
+        "Draw Curtain":
+
+            jump curtain
+
+        "Leave":
+
+            jump later
+
+
+
+label curtain:
+
+    scene entrance
+    with fade
+    m "Is it a labyrinth or a maze?"
+
+    show rkseatone
+
+    r "Hi, welcome to my personal library, feel free to browse around. I will be upstairs when you have to have a chat."
+
+    menu:
+
+        "Forward":
+
+            jump forwardone
+
+        "Turn right":
+
+            jump rightone
+
+
+
+label rightone:
+
+    scene rightoneimage
+
+    m "Let me see if I can take a look at some of the books."
+
+    scene rightoneimagetwo
+
+    menu:
+
+
+        "Forward":
+
+            jump forwardprincip
+
+        "Look to the left":
+
+            jump looktheleft
+
+        "Look to the right":
+            jump rightforwardone
+
+
+        "Back":
+            jump curtain
+
+label looktheleft:
+    scene rightoneimagethree
+
+    m "I'll jump to a random page of one of these books."
+
+    menu:
+
+        "My Crowd":
+
+            jump crowd
+
+        "The Letter G":
+
+            jump gletter
+
+        "Back":
+
+            jump rightone
+
+label crowd:
+
+    scene rightoneimagethree
+    show mycrowdoneremovebg
+    m "{a=https://cuny.manifoldapp.org/projects/richard-kostelanetz-s-library/resource/my-crowd}Link to Manifold{/a}"
+
+    $ collected_items += 1
+    "Collected [collected_items] out of [total_items] books."
+    hide mycrowdoneremovebg
+    show mycrowdtworemovebg
+
+    m "Big fan of Mcluhan."
+
+    menu:
+
+        "Back to shelf":
+
+            jump looktheleft
+
+
+label gletter:
+
+    scene rightoneimagethree
+    show lettergoneremovebg
+    m "{a=https://cuny.manifoldapp.org/projects/richard-kostelanetz-s-library/resource/the-letter-g}Link to Manifold{/a}"
+    $ collected_items += 1
+    "Collected [collected_items] out of [total_items] books."
+    hide lettergoneremovebg
+    show lettergtworemovebg
+
+    m "Dental hygine is important."
+
+    menu:
+
+        "Back to shelf":
+
+            jump looktheleft
+
+
+
+
+label rightforwardone:
+    scene dscf0513
+    m "I'll have to ask him about this."
+    menu:
+
+        "Back":
+
+            jump rightone
+
+
+label forwardprincip:
+    scene dscf0514
+
+    menu:
+
+        "Forward":
+
+            jump forwardcenter
+
+        "Look at shelf on the left":
+
+            jump centerleftshelf
+
+label centerleftshelf:
+    scene dscf0515
+    m "Reference books and some of his original work."
+    scene dscf0516
+    m "Dictionaries and Encyclopedias."
+    scene dscf0517
+    m "More of his original work and unbound books in cigar cases."
+
+    menu:
+
+        "Back":
+            jump forwardprincip
+
+
+label forwardcenter:
+    scene dscf0522
+
+    menu:
+
+
+        "Turn left":
+
+            jump leftnewstage
+
+        "Look to the right":
+
+            jump rightcenterkindof
+
+
+
+label rightcenterkindof:
+
+    scene dscf0526
+
+    m "Books on Art Movements."
+
+    scene dscf0521
+
+    m "Books authored by Richard."
+    scene dscf0557
+    m "Reference books and some more by Richard. Maybe I will take a look at one."
+
+
+    menu:
+
+        "Open Repugnance":
+
+            jump repug
+
+        "Back":
+
+            jump forwardcenter
+
+label repug:
+    scene dscf0557
+    show dscf0768removebg
+    m "{a=https://cuny.manifoldapp.org/projects/richard-kostelanetz-s-library/resource/repugnance}Link to Manifold{/a}"
+    $ collected_items += 1
+    "Collected [collected_items] out of [total_items] books."
+    hide dscf0768removebg
+    show dscf0769removebg
+
+
+    m "Sure is gruesome."
+
+    menu:
+
+
+        "Back":
+
+            jump forwardcenter
+
+
+label leftnewstage:
+    scene dscf0527
+    m "I can see some stairs at the end, Richard is probably up there"
+
+
+
+    vr "If you don't mind, I need some help up here reshelving books up here."
+
+    menu:
+
+        "Head upstairs":
+
+            jump upstairs
+
+        "Back to start":
+
+            jump curtain
+
+
+
+
+label lowerleft:
+
+
+
+label forwardone:
+
+
+    scene dscf0709
+
+    m "Seems to be a non-fiction collection."
+
+    menu:
+
+        "Forward":
+            jump forfor
+
+        "Look to the upper left":
+
+            jump forwardupleft
+
+        "Look to the upper right":
+
+            jump fordwardupright
+
+
+
+label forwardupleft:
+    scene dscf0710
+    m "Neat, here is one of Richard's original books."
+    menu:
+
+        "Open My fortune Cookies":
+            jump myfortune
+
+        "Back":
+            jump forwardone
+
+
+label myfortune:
+    scene dscf0710
+    show dscf0778removebg
+    m "{a=https://cuny.manifoldapp.org/projects/richard-kostelanetz-s-library/resource/repugnance}Link to Manifold{/a}"
+    $ collected_items += 1
+    "Collected [collected_items] out of [total_items] books."
+    hide dscf0778removebg
+    show dscf0779removebg
+
+
+    m "Lucky."
+    menu:
+
+        "Back":
+            jump forwardone
+
+label fordwardupright:
+    scene dscf0711
+
+
+
+    menu:
+
+        "Back":
+            jump forwardone
+
+label forfor:
+    scene dscf0715
+
+    m "I am at the lower left corner of the library."
+
+    menu:
+
+
+
+        "Turn Right":
+
+            jump forwardrightthree
+
+        "Look to the upper left":
+
+            jump forwardupleftone
+
+        "Look to the upper right":
+
+            jump fordwarduprighttwo
+
+
+
+label fordwarduprighttwo:
+    scene dscf0716
+
+    menu:
+
+        "Back":
+
+            jump forfor
+
+label forwardupleftone:
+    scene dscf0713
+    menu:
+
+        "Back":
+
+            jump forfor
+
+label forwardrightthree:
+    scene dscf0719
+    m "I see a staircase over there, I wonder if he's up there."
+    m "Cool, here is another one of Richard's original Book Art books to the left of me."
+
+    menu:
+
+        "Forward":
+
+            jump forwardstaircase
+
+        "Open Sentences For The 21st Century":
+
+            jump twentyfirst
+
+label twentyfirst:
+    scene dscf0719
+    show dscf0770removebg
+    m "{a=https://cuny.manifoldapp.org/projects/richard-kostelanetz-s-library/resource/sentences-for-the-21st-century}Link to Manifold{/a}"
+    $ collected_items += 1
+    "Collected [collected_items] out of [total_items] books."
+
+    hide dscf0770removebg
+
+    show dscf0771removebg
+
+    m "Sure is/does."
+
+    menu:
+        "Back":
+
+            jump forwardrightthree
+
+label forwardstaircase:
+
+    scene dscf0728
+    m "I can see some stairs at the end, Richard is probably up there."
+
+
+
+    vr "If you don't mind, I need some help up here reshelving books up here."
+
+    menu:
+
+        "Head upstairs":
+
+            jump upstairs
+
+        "Back to start":
+
+            jump curtain
+
+    stop music
+label upstairs:
+
+    scene dscf0733 with dissolve
+    pause 2.0
+
+
+    scene dscf0737 with dissolve
+    pause 2.5
+
+    scene dscf0739 with dissolve
+    pause 2.5
+    scene dscf0751 with dissolve
+    pause 2.5
+    scene dscf0753 with dissolve
+    pause 2.5
+    scene dscf0755 with dissolve
+    pause 2.5
+    scene dscf0758 with dissolve
+    pause 2.5
+    scene dscf0759 with dissolve
+    pause 2.5
+    scene dscf0762 with dissolve
+    pause 2.5
+    scene dscf0764 with dissolve
+    r "Let me sit over there."
+
+    menu:
+        "Ask about his library.":
+            jump richardlibrary
+
+label richardlibrary:
+    scene dscf0707
+    play music "rkaudio.mp3"
+
+    "{b}Good Ending{/b}."
+
+    return
+
+
+
+
+
+
+label later:
+
+    m "I decide to come back another time"
+
+    scene black
+    with dissolve
+
+
+
+    "{b}Bad Ending{/b}."
+
+    return
