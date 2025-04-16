@@ -58,7 +58,8 @@ label enter:
 
 
     m "A drawn curtain at the end of a hallway."
-    m "I am still not sure what I will ask him about when I find him. Maybe something about editing John Cage, or about his anthology of Gertude Stein writing?"
+    m "I am still not sure what I will ask him about when I find him."
+    m "Maybe something about editing John Cage, or about his anthology of Gertude Stein writing?"
 
     menu:
 
@@ -66,7 +67,7 @@ label enter:
 
             jump curtain
 
-        "Reflect on why I'm here":
+        "Who is Richard Kostelanetz?":
 
             jump reflect
 
@@ -80,11 +81,22 @@ label enter:
 label reflect:
     scene secondentrance
 
-    m "Richard Koestelaniz is an esteemed publisher of avantgarde literature fom the 1960s, first staring in Chelsea then moving to Ridgewood"
+    m "Richard Kostelaniz is an esteemed publisher who is best known for anthologizing avantgarde literature."
     show dscf0787removebg
     m "I brought two of my favorite books he edited, maybe he can sign one."
-
-
+    hide dscf0787removebg
+    show dscf0793removebg
+    m "On the back of one of my books there is some biographical information."
+    hide dscf0793removebg
+    show dscf0794removebg
+    m "Inside another it shows all the Reference books he is listed in."
+    hide dscf0794removebg
+    scene dscf0820
+    with fade
+    m "There's a print out on the back of the entrance door here. I should read it."
+    scene secondentrance
+    with fade
+    m "Ok, time to move on."
     menu:
 
         "Draw Curtain":
@@ -168,7 +180,7 @@ label crowd:
 
     scene rightoneimagethree
     show mycrowdoneremovebg
-    m "{a=https://cuny.manifoldapp.org/projects/richard-kostelanetz-s-library/resource/my-crowd}Link to Manifold{/a}"
+    m "{a=https://cuny.manifoldapp.org/projects/richard-kostelanetz-s-library/resource-collection/my-crowd}Link to Manifold{/a}"
 
     $ collected_items += 1
     "Collected [collected_items] out of [total_items] books."
@@ -188,7 +200,7 @@ label gletter:
 
     scene rightoneimagethree
     show lettergoneremovebg
-    m "{a=https://cuny.manifoldapp.org/projects/richard-kostelanetz-s-library/resource/the-letter-g}Link to Manifold{/a}"
+    m "{a=https://cuny.manifoldapp.org/projects/richard-kostelanetz-s-library/resource-collection/the-letter-g}Link to Manifold{/a}"
     $ collected_items += 1
     "Collected [collected_items] out of [total_items] books."
     hide lettergoneremovebg
@@ -284,7 +296,7 @@ label rightcenterkindof:
 label repug:
     scene dscf0557
     show dscf0768removebg
-    m "{a=https://cuny.manifoldapp.org/projects/richard-kostelanetz-s-library/resource/repugnance}Link to Manifold{/a}"
+    m "{a=https://cuny.manifoldapp.org/projects/richard-kostelanetz-s-library/resource-collection/repugnance}Link to Manifold{/a}"
     $ collected_items += 1
     "Collected [collected_items] out of [total_items] books."
     hide dscf0768removebg
@@ -331,7 +343,7 @@ label forwardone:
 
     scene dscf0709
 
-    m "Seems to be a non-fiction collection."
+    m "A collection of Magazine Self-Retrospectives."
 
     menu:
 
@@ -353,7 +365,7 @@ label forwardupleft:
     m "Neat, here is one of Richard's original books."
     menu:
 
-        "Open My fortune Cookies":
+        "Open My Fortune Cookies":
             jump myfortune
 
         "Back":
@@ -363,7 +375,7 @@ label forwardupleft:
 label myfortune:
     scene dscf0710
     show dscf0778removebg
-    m "{a=https://cuny.manifoldapp.org/projects/richard-kostelanetz-s-library/resource/repugnance}Link to Manifold{/a}"
+    m "{a=https://cuny.manifoldapp.org/projects/richard-kostelanetz-s-library/resource-collection/my-fortune-cookie}Link to Manifold{/a}"
     $ collected_items += 1
     "Collected [collected_items] out of [total_items] books."
     hide dscf0778removebg
@@ -444,7 +456,7 @@ label forwardrightthree:
 label twentyfirst:
     scene dscf0719
     show dscf0770removebg
-    m "{a=https://cuny.manifoldapp.org/projects/richard-kostelanetz-s-library/resource/sentences-for-the-21st-century}Link to Manifold{/a}"
+    m "{a=https://cuny.manifoldapp.org/projects/richard-kostelanetz-s-library/resource-collection/sentences-for-the-21st-century}Link to Manifold{/a}"
     $ collected_items += 1
     "Collected [collected_items] out of [total_items] books."
 
@@ -478,7 +490,7 @@ label forwardstaircase:
 
             jump curtain
 
-    stop music
+
 label upstairs:
 
     scene dscf0733 with dissolve
@@ -506,12 +518,44 @@ label upstairs:
     r "Let me sit over there."
 
     menu:
-        "Ask about his library.":
+        "Ask a few questions.":
             jump richardlibrary
 
 label richardlibrary:
     scene dscf0707
-    play music "rkaudio.mp3"
+
+label sound_menu:
+    stop music fadeout 1.0
+    menu:
+        "Ask about his library.":
+            $ renpy.play("rkaudio.mp3", channel="sound")
+            jump sound_menu
+
+        "Ask about the book: My Crowd":
+            $ renpy.play("mycrowd.mp3", channel="sound")
+            jump sound_menu
+
+        "Ask about the book: The Letter G":
+            $ renpy.play("letterg.mp3", channel="sound")
+            jump sound_menu
+
+        "Ask about the book: Sentences For The 21st Century":
+            $ renpy.play("sentencesfor.mp3", channel="sound")
+            jump sound_menu
+
+        "Ask about the book: Repugnance":
+            $ renpy.play("repugnance.mp3", channel="sound")
+            jump sound_menu
+
+        "Ask about the book: My Fortune Cookies":
+            $ renpy.play("myforcookies.mp3", channel="sound")
+            jump sound_menu
+
+        "I'm done":
+            return
+
+
+
 
     "{b}Good Ending{/b}."
 
